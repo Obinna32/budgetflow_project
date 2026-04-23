@@ -1,4 +1,5 @@
 from django.db import models, migrations
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Transaction(models.Model):
@@ -6,6 +7,7 @@ class Transaction(models.Model):
         ('expense', 'Expense'),
         ('income', 'Income'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=100)
