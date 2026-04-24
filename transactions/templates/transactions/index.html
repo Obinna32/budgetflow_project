@@ -6,6 +6,21 @@
         <h1>My Transactions</h1>
         <a href = "{% url 'transaction_add' %}" class="btn-add"> + Add New </a>
     </div>
+
+    <div class="summary-container">
+        <div class="summary-card">
+            <h3>Balance</h3>
+            <p class = "balance-amount">N{{ balance }}</p>
+        </div>
+        <div class="summary-card">
+            <h3>Income</h3>
+            <p class = "income-amount">+ N{{ total_income}}</p>
+        </div>
+        <div class="summary-card">
+            <h3>Expenses</h3>
+            <p class="expense-amount"> - N{{ total_expense }}</p>
+        </div>
+    </div>
     <table>
         <thead>
             <tr>
