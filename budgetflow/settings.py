@@ -121,3 +121,9 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+# Where to redirect users if they aren't logged in
+LOGIN_URL = '/admin/login/' 
+
+# Where to redirect users after they login
+LOGIN_REDIRECT_URL = '/'

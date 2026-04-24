@@ -1,0 +1,12 @@
+{% extends "transactions/base.html" %}
+
+{% block content %}
+    <h1> Add Transaction</h1>
+    <form method = "POST" class="transaction-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save Transaction</button>
+        <a href="{% url 'transaction_list' %}">Cancel</a>
+{% endblock content %}
+
+
