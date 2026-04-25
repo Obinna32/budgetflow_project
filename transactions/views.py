@@ -3,6 +3,7 @@ from .models import Transaction
 from .forms import TransactionForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+from django.contrib import messages
 
 # Create your views here.
 
@@ -56,17 +57,20 @@ def transaction_create(request):
 
 @login_required
 def transaction_update(request, pk):
-    #Gt the transaction or error 404  if not found
     transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
-
+    
     if request.method == "POST":
         form = TransactionForm(request.POST, instance=transaction)
         if form.is_valid():
             form.save()
             return redirect('transaction_list')
-        else:
-            form = TransactionForm(instance=transaction)
-        return render(request, 'transactions/transaction_form.html', {'form': form, 'edit_mode': True})
+    else:
+        form = TransactionForm(instance=transaction)
+    
+    return render(request, 'transactions/transaction_form.html', {
+        'form': form, 
+        'edit_mode': True
+    })
     
 
 @login_required
@@ -74,6 +78,7 @@ def transaction_delete(request, pk):
     transaction = get_object_or_404(Transaction, pk=pk, user=request.user)
     if request.method == "POST":
         transaction.delete()
+        messages.success(request, "Transaction deleted successfully!")
         return redirect('transaction_list')
     return render(request, 'transactions/transaction_confirm_delete.html', {'transaction': transaction})
 

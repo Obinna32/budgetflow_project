@@ -1,6 +1,5 @@
 {% extends 'transactions/base.html' %}
-{% load static %}
-{% static "css/style.css" %}
+
 {% block content %}
 
     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -48,8 +47,8 @@
                     N{{ transaction.amount }}
                 </td>
                 <td>
-                    <a href="{% url "transaction_edit" transaction.pk %}" style="color: #3498db; text-decoration: none; margin-right: 10px;">Edit</a>
-                    <a href="{% url "transaction_delete" transaction.pk %}" style="color: #e74c3c; text-decoration: none; margin-right: 10px;">Delete</a>
+                    <a href="{% url 'transaction_edit' transaction.pk %}" style="color: #3498db; text-decoration: none; margin-right: 10px;">Edit</a>
+                    <a href="{% url 'transaction_delete' transaction.pk %}" style="color: #e74c3c; text-decoration: none;">Delete</a>
                 </td>
             </tr>
             {% empty %}

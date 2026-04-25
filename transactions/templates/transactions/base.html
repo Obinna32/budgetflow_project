@@ -8,6 +8,22 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+            <div id="msg" style="position: fixed; top: 20px; right: 20px; padding: 15px 25px; background: #2ecc71; color: white; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000;">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <script>
+            setTimeout(function() {
+                var msg = document.getElementById('msg');
+                if (msg) {
+                    msg.style.display = 'none';
+                }
+            }, 3000);
+        </script>
+    {% endif %}
     <div class = "container">
         <nav style="display: flex; justify-content: space-between; align-items: center;">
             <a href="{% url 'transaction_list' %}" style="text-decoration: none;">
