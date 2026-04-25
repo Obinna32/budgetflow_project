@@ -8,6 +8,11 @@
         <a href = "{% url 'transaction_add' %}" class="btn-add"> + Add New </a>
     </div>
 
+    <form method="GET" style="margin-bottom: 20px; display: flex; gap: 10px;">
+        <input type="text" name="search" placeholder="Search by title..." value="{{ search_query }}" style="flex: 1;">
+        <button type="submit" class = "btn-add" style="border: none; cursor: pointer;">Search</button>
+        <a href="{% url "transaction_list" %}" class="btn" style="background-color: #95a5a6; text-decoration:none;">Reset</a>
+    </form>
     <div class="summary-container">
         <div class="summary-card">
             <h3>Balance</h3>

@@ -8,8 +8,20 @@ from django.db.models import Sum
 
 @login_required
 def transaction_list(request):
+
+    #Get the search query from the URL
+    search_query = request.GET.get('search', '')
+    category_query = request.GET.get('category', '')
+
     #This will fetch all transactions from the database
     transactions = Transaction.objects.filter(user=request.user).order_by('-date')
+
+    #Apply filters if they exist
+    if search_query:
+        transactions = transactions.filter(title__icontains=search_query)
+
+    if category_query:
+        transactions = transactions.filter(category__icontains=category_query)
 
     #Calculate Total income
     total_income = transactions.filter(transaction_type='income').aggregate(Sum('amount'))['amount__sum'] or 0
