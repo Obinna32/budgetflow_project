@@ -9,8 +9,23 @@
 </head>
 <body>
     <div class = "container">
-        <nav>
-            <strong>BudgetFlow</strong>
+        <nav style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="{% url 'transaction_list' %}" style="text-decoration: none;">
+                <strong style="font-size: 24px; color: #2c3e50;">BudgetFlow</strong>
+            </a>
+            <div>
+                {% if user.is_authenticated %}
+                    <span style="margin-right: 15px;">Hello, <strong>{{ user.username }}</strong></span>
+                    <!-- We use a small form for logout because Django 5.0+ requires POST for logout -->
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background: none; border: none; color: #e74c3c; cursor: pointer; font-weight: bold;">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="/admin/login/" style="margin-right: 15px; text-decoration: none; color: #3498db;">Login</a>
+                    <a href="{% url 'register' %}" style="text-decoration: none; color: #3498db; font-weight: bold;">Register</a>
+                {% endif %}
+                </div>
         </nav>
         <hr>
         {% block content %}

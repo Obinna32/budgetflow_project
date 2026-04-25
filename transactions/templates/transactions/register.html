@@ -1,0 +1,13 @@
+{% extends "transactions/base.html" %}
+
+{% block content %}
+    <h1>Create an Account</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Sign Up</button>
+    </form>
+    <p style="margin-top: 20px;">Already have an account? <a href="/admin/login/">Login here</a></p>
+{% endblock content %}
+
+

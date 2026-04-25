@@ -76,3 +76,17 @@ def transaction_delete(request, pk):
         transaction.delete()
         return redirect('transaction_list')
     return render(request, 'transactions/transaction_confirm_delete.html', {'transaction': transaction})
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('transaction_list')
+        else:
+            form = UserCreationForm()
+        return render(request, 'transactions/register.html', {'form': form})
