@@ -92,6 +92,6 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('transaction_list')
-        else:
-            form = UserCreationForm()
-        return render(request, 'transactions/register.html', {'form': form})
+    else:
+        form = UserCreationForm()
+    return render(request, 'transactions/register.html', {'form': form})
